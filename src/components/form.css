@@ -1,0 +1,15 @@
+.form {
+    height: 40vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-content: flex-end;
+    padding-left: 45px;
+
+}
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
