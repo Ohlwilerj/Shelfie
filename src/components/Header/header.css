@@ -1,0 +1,21 @@
+  
+.header {
+    width: 100%;
+    height: 10vh;
+    background-color: #d34735;
+    color: #ffffff;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+img {
+    height: 3rem;
+    width: 3rem;
+}
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background: #d34735;
+}

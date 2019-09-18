@@ -1,2 +1,2 @@
 SELECT * FROM inventory
-ORDER BY id;
+WHERE id = $1;

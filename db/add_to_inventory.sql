@@ -1,4 +1,4 @@
-INSERT INTO inventory(product_name, price, image)
-VALUES (${product_name}, ${price}, ${image})
-
--- SELECT * FROM inventory;
+INSERT INTO inventory
+(product_name, price, image)
+VALUES
+($1, $2, $3)

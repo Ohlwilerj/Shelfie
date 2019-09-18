@@ -1,37 +1,30 @@
-import React, {Component} from 'react';
+import React from 'react'
+import { HashRouter, Route, Switch } from 'react-router-dom'
+import Dashboard from './components/Dashboard'
+import Form from './components/Form/Form'
+import Header from './components/Header/Header'
 import './App.css';
-import Dashboard from './components/Dashboard';
-import Form from './components/Form';
-import Header from './components/Header'
-import axios from 'axios'
 
-class App extends Component {
-  
-  constructor() {
-    super()
-    this.state = {
-      inventory: []
-    }
-  }
-  
-  addToInventory(body) {
-    axios.post('api/inventory', body).then(res => {
-      this.this.setState({inventory: res.data})
-    })
-  }
+class App extends React.Component {
 
   render() {
-
     return (
-      <div className="App">
-        <Header />
-        <Dashboard 
-          updatedList={this.state.inventory} />
-        <Form 
-          addProduct={this.addToInventory}/>
-      </div>
-    );
+      <HashRouter>
+        <div className="app">
+          <Header />
+          <div className="container">
+            {/* <Dashboard products={ this.state.inventory } get={ this.getAll } setEdit={ this.setEdit } /> */}
+            {/* <Form get={ this.getAll } currentEdit={ this.state.currentEdit } /> */}
+            <Switch>
+              <Route exact path='/' component={ Dashboard } />
+              <Route path='/add' component={ Form } />
+              <Route path='/edit/:id' component={ Form } />
+            </Switch>
+          </div>
+        </div>
+      </HashRouter>
+    )
   }
+}
 
-} 
 export default App;
