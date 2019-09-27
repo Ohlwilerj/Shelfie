@@ -1,24 +1,39 @@
-  
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import axios from 'axios';
+import {Link} from 'react-router-dom'
 
 export default class Product extends Component {
-    
-    render() {
 
-        let { name, price, id } = this.props.product
-        let imgUrl = this.props.product.img
+  delete = () => {
+    let {id} = this.props
+    axios.delete(`/api/products/${id}`).then(() => {
+      window.location.reload()
+    })
+  }
 
-        return (
-            <div className="product">
-                <p>{ name }</p>
-                <p>{ price }</p>
-                <img src={ `${imgUrl}` } alt={ name }/>
-                <div>
-                    <Link to='/' onClick={ () => this.props.deleteProduct(id) } >Delete</Link>
-                    <Link to={`/edit/${id}`} onClick={ () => this.props.setEdit(id) }>Edit</Link>
-                </div>
-            </div>
-        )
-    }
+  render() {
+
+    let { name, price, image, id } = this.props
+
+    return (
+
+
+      <div className='productcontainer'>
+        <img src={image} alt={name} className='product_image' />
+        <div className='imgandtext'>
+          <div className='producttextholder'>
+            
+            <h3 className='nametext'>{name}</h3>
+            <h3 className='pricetext'>${price}</h3>
+          </div>
+          <div className='productbuttonsholder'>
+
+          <Link to={`/edit/${id}`}><button className='productbuttons'
+          onClick={() => this.props.setID(id)}>Edit</button></Link>
+          <button className='productbuttons' onClick={this.delete}>Delete</button>
+          </div>
+        </div>
+      </div>
+    )
+  }
 }

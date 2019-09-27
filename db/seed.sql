@@ -1,6 +1,10 @@
--- CREATE TABLE products (id SERIAL PRIMARY KEY, product_name varchar(25), price INTEGER, image TEXT)
+Drop table if exists products;
 
--- SELECT * FROM inventory;
+create table products (id serial primary key, name varchar(200), price int, image text);
 
--- INSERT INTO inventory (name, price, img)
--- VALUES ('Sega', 40, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ4-TXO5o_EE1bLWkVyO0WqQGPbOdd8FlOF-VnpGOmMRUpl8wjgMTJEqBvqeI_-_jvFcXs0Uz2iv3bApIU4KdvVHV2HGe1n_-QuS_Ed9FKuud4YIZMQWy24jg&usqp=CAc');
+insert into product
+(name, price, image)
+values($1, $2, $3)
+
+delete from product
+where id = $1

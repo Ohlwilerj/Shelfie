@@ -1,30 +1,54 @@
-import React from 'react'
-import { HashRouter, Route, Switch } from 'react-router-dom'
-import Dashboard from './components/Dashboard'
-import Form from './components/Form/Form'
-import Header from './components/Header/Header'
+import React, { Component } from 'react';
 import './App.css';
+import axios from 'axios'
+import Dashboard from './components/Dashboard'
+import Header from './components/Header/Header'
+import Form from './components/Form/Form'
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 
-class App extends React.Component {
+
+export default class App extends Component {
+
+  state = {
+    updateID: 0,
+    name: '',
+    price: '',
+    imgUrl: ''
+  }
+
+  setID = (id) => {
+
+    axios.get(`/api/products/${id}`).then(res => {
+      let { name, price, image } = res.data[0]
+      this.setState({
+        updateID: id,
+        name: name,
+        price: price,
+        imgUrl: image,
+      })
+    })
+  }
 
   render() {
     return (
-      <HashRouter>
-        <div className="app">
+      <Router>
+        <div className="App">
           <Header />
-          <div className="container">
-            {/* <Dashboard products={ this.state.inventory } get={ this.getAll } setEdit={ this.setEdit } /> */}
-            {/* <Form get={ this.getAll } currentEdit={ this.state.currentEdit } /> */}
+          <div className='body'>
             <Switch>
-              <Route exact path='/' component={ Dashboard } />
-              <Route path='/add' component={ Form } />
-              <Route path='/edit/:id' component={ Form } />
+              <Route exact path='/' render={() => <Dashboard
+                setID={this.setID}
+                inventory={this.state.inventory} />} />
+              <Route path='/add' render={() => <Form setID={this.setID}
+                updateID={this.state.updateID}
+                props={this.state} />} />
+              <Route path='/edit/:id' render={() => <Form setID={this.setID}
+                updateID={this.state.updateID}
+                props={this.state} />} />
             </Switch>
           </div>
         </div>
-      </HashRouter>
-    )
+      </Router>
+    );
   }
 }
-
-export default App;

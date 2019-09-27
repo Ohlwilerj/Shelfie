@@ -1,4 +1,3 @@
-INSERT INTO inventory
-(product_name, price, image)
-VALUES
-($1, $2, $3)
+insert into products
+(name, price, image)
+values($1, $2, $3)

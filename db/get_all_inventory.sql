@@ -1,2 +1,2 @@
-SELECT * FROM inventory
+SELECT * FROM products
 ORDER BY id;

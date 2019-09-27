@@ -1,2 +1,2 @@
-SELECT * FROM inventory
+SELECT * FROM products
 WHERE id = $1;
